@@ -8,11 +8,7 @@ var app = express();
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-
-var dbo; 
-
-
+let dbo; 
 
 MongoClient.connect(url, function(err, db) {
     if (err) throw err;
@@ -20,10 +16,6 @@ MongoClient.connect(url, function(err, db) {
     //dbo = db.db("MONGO_REST");
     
 });
-
-
-
-/**COLLECTIONS */
 
 app.post('/createCollection/:collection', function(req, res, next) {
     dbo.createCollection(req.params.collection, function(err, result) {
@@ -44,9 +36,6 @@ app.delete('/deleteCollection/:collection', function(req, res, next){
       }
    })
 })
-
-
-
 
 /**MORE FEATURES */
 app.get('/findOne/:collection', function(req, res, next) {
@@ -73,12 +62,7 @@ app.delete('/deleteOne/:collection', function(req, res, next){
         res.json(obj)
     });
 })
-
-
-
-
 /**THE ORIGINALS */
-
 
 app.put('/:collection/:id', function(req, res, next){
     console.log('in put', req.params,req.body)
